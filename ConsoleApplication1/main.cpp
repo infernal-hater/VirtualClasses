@@ -1,22 +1,26 @@
 ﻿#include <iostream>
 #include "gamefield.h" // класс Игрового Поля
 
+#define MAX_ITERARIONS 5
+
 using namespace std;
 
 int main() {
 	// создаем игровое поле
 	GameField gf;
 
-	// печатаем матрицу 
+	// печатаем матрицу начального поля
+	cout << "Start positions:\n";
 	gf.print();
-	cout << "\n\n\n";
+	cout << "\n";
 
-	// делаем 3 шага-итерации и печатаем 
-	for (int i = 0; i < 3; i++) {
+	// делаем MAX_ITERATIONS шага-итерации и печатаем 
+	for (int i = 0; i < MAX_ITERARIONS; i++) {
 
 		gf.step(); // Делаем шаг
+		cout << "Iteration #" << i << "\n";
 		gf.print(); // Делаем вывод
-		cout << "\n\n\n";
+		cout << "\n";
 
 	}
 
@@ -24,4 +28,3 @@ int main() {
 
 	return 0;
 }
-// ОНО, БЛИН, РАБОТАЕТ! Просто не трожь.

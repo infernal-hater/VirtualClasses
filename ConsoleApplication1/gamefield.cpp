@@ -131,19 +131,21 @@ void GameField::step() {
 
 // Метод вывода игрового поля в окно консоли
 void GameField::print() const {
+
     cout << "<=================>\n";
     for (int i = 0; i < _data.front().size(); i++) {
         for (int j = 0; j < _data.size(); j++) {
-            if (_data[i][j] == nullptr) {
+
+            if (_data[i][j] == nullptr) { // Вывод "_ " в случае, если клетка пуста
                 cout << "_ ";
             }
-            else {
+            else { // Выводит "Y " или "D " в случае, если на клетке жертва или хищник соотв.
                 cout << _data[i][j]->charType() << " ";
             }
         }
         cout << "\n";
     }
     cout << "<=================>\n";
-    cout << "\'Y\' prey: " << _count_prey << "\n";
-    cout << "\'D\' predators: " << _count_predators << "\n";
+    cout << "Ammount of preYers: " << _count_prey << "\n";
+    cout << "Ammount of preDators: " << _count_predators << "\n";
 }

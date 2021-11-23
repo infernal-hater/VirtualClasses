@@ -1,6 +1,6 @@
 #include "gamefield.h"
 
-// Заполнение поля животными
+// Заполнение поля животными через рандом
 Animal* GameField::_randCell() {
     switch (rand() % 3) {
 
@@ -56,6 +56,7 @@ void GameField::_countAnimals() {
     }
 }
 
+// Заполнение игрового поля
 GameField::GameField()
 {
     // для функции rand()
@@ -74,7 +75,9 @@ GameField::GameField()
     _countAnimals();
 }
 
+// Метод, отвечающий за шаг
 void GameField::step() {
+
     // объявляем временную матрицу булевых значений, такую же по размерам как _data
     // нужна для отслеживаний перемещений Животных, чтобы не перемещать одно Животное несколько раз
     vector<vector<bool>> moving;
@@ -104,12 +107,13 @@ void GameField::step() {
                 _data[new_i][new_j] = _data[i][j];
                 _data[i][j] = nullptr;
 
-                // в перемещенной клетке стави true
+                // в перемещенной клетке - true
                 moving[new_i][new_j] = true;
                 continue;
             }
 
             // если по новым координатам находится животное, то смотрим - будет ли оно съедено перемещаемым животным
+            // Жертва не может съесть кого-либо, Хищник не может съесть Хищника
             if (_data[new_i][new_j]->willBeEatenBy(_data[i][j])) {
                 delete _data[new_i][new_j];
                 _data[new_i][new_j] = _data[i][j];
@@ -124,8 +128,10 @@ void GameField::step() {
     _countAnimals();
 }
 
+
+// Метод вывода игрового поля в окно консоли
 void GameField::print() const {
-    cout << "=================\n";
+    cout << "<=================>\n";
     for (int i = 0; i < _data.front().size(); i++) {
         for (int j = 0; j < _data.size(); j++) {
             if (_data[i][j] == nullptr) {
@@ -137,7 +143,7 @@ void GameField::print() const {
         }
         cout << "\n";
     }
-    cout << "=================\n";
+    cout << "<=================>\n";
     cout << "\'Y\' prey: " << _count_prey << "\n";
     cout << "\'D\' predators: " << _count_predators << "\n";
 }

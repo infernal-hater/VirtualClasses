@@ -44,7 +44,7 @@ public:
 // класс "Хищник", наследуется от "Животного"
 class Predator : public Animal {
 public:
-	// та же самая реализация как у Prey
+	// аналогично Prey
 	Predator();
 
 	char charType() const override;

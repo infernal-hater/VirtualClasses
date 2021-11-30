@@ -5,8 +5,8 @@
 #include <vector> // для vector<>
 #include <time.h> // для time()
 
-#define GAME_FIELD_ROWS 5 // кол-во строк в матрице игровового поля
-#define GAME_FIELD_COLS 5 // кол-во столбцов в матрице
+#define GAME_FIELD_ROWS 10 // кол-во строк в матрице игровового поля
+#define GAME_FIELD_COLS 10 // кол-во столбцов в матрице
 
 using namespace std;
 
@@ -14,30 +14,23 @@ using namespace std;
 class GameField {
 
 private:
-	// двумерная матрица игрового поля - массив массивов (vector - динамический массив),
-	// где каждый элемент матрицы - указатель на "Животное"
 	vector<vector<Animal*>> _data;
-	// кол-во Хищников
 	int _count_predators = 0;
-	// кол-во Добыч
 	int _count_prey = 0;
 
-	// возвращает случайные данные для указателя клетки Animal* 
-	Animal* _randCell();
-
-	// метод принимает две переменных, в которые записывает рандомные координаты матрицы
+	// измененная функция получения рандомной клетки
+	// принимает шанс выпадения prey и predator (по умолчанию шансы равны 1/3)
+	Animal* _randCell(int prey_chance = 33, int predator_chance = 33);
 	void _randStep(int& i, int& j) const;
-
-	// метод проходится по матрице и считает Добычи и Хищников
 	void _countAnimals();
 
 public:
-	// конструктор по умолчанию, задает размеры векторам и инициализирует рандомными значениями
+	// конструктор по умолчанию
 	GameField();
 
-	// метод реализует один шаг-итерацию
-	void step();
+	// конструктор с параметрами
+	GameField(int prey_chance, int predator_chance);
 
-	// метод печатает матрицу в консоль и кол-во животных
+	void step();
 	void print() const;
 };

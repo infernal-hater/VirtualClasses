@@ -8,15 +8,20 @@ using namespace std;
 
 int main() {
 	
-	int lh_predator, lh_prey;
-	cout << "Enter the likelihood of a prey spawn: ";
-	cin >> lh_prey;
-	cout << "Enter the likelihood of a predator spawn: ";
-	cin >> lh_predator;
+	int lh_predator = 0, lh_prey = 0;
+
+	do {
+		cout << "Enter the likelihood of a prey spawn from 0 to 100: ";
+		cin >> lh_prey;
+	} while ((lh_prey <= -1) || (lh_prey >= 101));
+
+	do {
+		cout << "Enter the likelihood of a predator spawn from 0 to 100: ";
+		cin >> lh_predator;
+	} while ((lh_predator <= -1) || (lh_predator >= 101));
+	
 	system("cls");
 	cout << "\nPrey spawn chance is " << lh_prey << "%. Predator spawn chance is " << lh_predator << "%\n";
-	cout << "Press any key to start the simulation...\n";
-	system("pause");
 
 	GameField gf(lh_prey, lh_predator);
 
